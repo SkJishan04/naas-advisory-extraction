@@ -221,3 +221,245 @@ def col_precaution_tool(t):
         r'raised\s+bed|bunding|shade|net|trap|irrigation|'
         r'shed|insur(?:e|ance)|temporary\s+shed)\b'
     )
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Cause of Damage
+# ─────────────────────────────────────────────────────────────────────────────
+
+def col_cause(t):
+
+    hits = re.findall(
+        r'(?:[Dd]ue\s+to|[Bb]ecause\s+of)\s+([^\.\n]{5,120}?)(?:\.|,\s*(?:it|farmers|drain|light))',
+        t
+    )
+
+    flood = re.search(
+        r'(flood(?:ing)?\s+condition[^\.\n]{0,80}|'
+        r'Brahmaputra\s+river[^\.\n]{0,80}|'
+        r'above\s+(?:the\s+)?danger\s+level[^\.\n]{0,60})',
+        t,
+        re.IGNORECASE
+    )
+
+    if flood:
+        hits.insert(0, flood.group(1).strip())
+
+    return "; ".join(h.strip() for h in hits[:2])
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Recommendation
+# ─────────────────────────────────────────────────────────────────────────────
+
+def col_recommendation(t):
+
+    hits = re.findall(
+        r'(?:[Ff]armers\s+(?:are|may)\s+(?:advised?|adopt)\s+(?:to\s+)?|'
+        r'[Ii]t\s+is\s+(?:advised|recommended)\s+to\s+|'
+        r'[Ii]mmediately\s+|'
+        r'[Ii]t\s+is\s+advised\s+to\s+)'
+        r'[^\.\n]{5,200}',
+        t
+    )
+
+    if not hits:
+
+        hits = re.findall(
+            r'(?:[Hh]arvest(?:ing)?|'
+            r'[Ss]ow(?:ing)?|'
+            r'[Tt]ransplant|'
+            r'[Mm]aintain|'
+            r'[Ss]pray|'
+            r'[Aa]pply|'
+            r'[Dd]rain|'
+            r'[Cc]arry\s+out|'
+            r'[Uu]se\s+of|'
+            r'[Pp]rovide\s+mechanical\s+support|'
+            r'[Dd]igging\s+a\s+\d+\s*cm\s+deep|'
+            r'[Mm]ulch(?:ing)?|'
+            r'[Pp]lant\s+the)'
+            r'\s+[^\.\n]{5,180}',
+            t
+        )
+
+    return "; ".join(
+        h.strip()[:200]
+        for h in hits[:2]
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Varieties
+# ─────────────────────────────────────────────────────────────────────────────
+
+def col_varieties(t):
+
+    m = re.search(
+        r'(?:variet(?:y|ies)\s*(?:like|such\s+as|are|viz\.?|recommended|:)?\s*'
+        r'(?:[\w\s]*?(?:may\s+adopt|is|include|for\s+the\s+state\s+of\s+Assam))?\s*[.:]?\s*)'
+        r'([\w\s,\-–()&/]+?)(?:\.\s|The\s|$)',
+        t,
+        re.IGNORECASE
+    )
+
+    if m and len(m.group(1).strip()) > 3:
+        return m.group(1).strip().rstrip(",;. ")[:250]
+
+    named = []
+
+    named += re.findall(
+        r'\b(TS-\d{2,}|PM-\d{2}|NRCHB-\d{3}|T-\d{3}|Bonneville)\b',
+        t
+    )
+
+    named += re.findall(
+        r'\b(Ranjit(?:\s+Sub\s*1)?|Bahadur|Satyaranjan|'
+        r'Basundhara|Mahsuri|Ketekijoha|Luit|'
+        r'Kop(?:i|ee)lee|Dishang|Chilarai|'
+        r'Lachit|JyotiPrasad|Bishnuprasad|'
+        r'[Kk]anaklata|'
+        r'[Dd]inanath(?:\s+[Jj]oymoti)?|'
+        r'Swarnabh|Boro-[12]|'
+        r'Cauvery|Joymati|IR-50)\b',
+        t
+    )
+
+    named += re.findall(
+        r'(Pratap|Sonai|SGC\s*\d+|K\s*851|K\s*815|'
+        r'Pusa\s+\w+(?:\s+\d+)?|'
+        r'SG-\d|'
+        r'Ganga\s*\d+|'
+        r'Bio\s*\d{4}|'
+        r'Vivek\s+Maize\s+Hybrid\s+\d+|'
+        r'Dhawal|Navjot|Rio-de-Geneiro|'
+        r'Nadia|Karkai|Bardwan|Moran|Jorhat|China)\b',
+        t
+    )
+
+    return ", ".join(dict.fromkeys(named))[:250] if named else ""
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Extra Information
+# ─────────────────────────────────────────────────────────────────────────────
+
+def col_extra(t):
+
+    if re.search(
+        r'\b(?:Avoid\s+staying|'
+        r'Seek\s+shelter|'
+        r'Refrain\s+from|'
+        r'landslide|'
+        r'danger\s+level|'
+        r'Brahmaputra)\b',
+        t,
+        re.IGNORECASE
+    ):
+        return t.strip()[:200]
+
+    if re.search(
+        r'\b(?:cattle|livestock|animal|shed|apiar)\b',
+        t,
+        re.IGNORECASE
+    ):
+        return t.strip()[:200]
+
+    m = re.search(
+        r'(?:dig(?:ging)?|trench)\s+(?:a\s+)?'
+        r'(\d+)\s*cm\s+deep,?\s*'
+        r'(\d+)\s*cm\s+wide\s+trench,?\s*'
+        r'(\d+)\s*m\s+(?:away\s+from|from)\s+trunk',
+        t,
+        re.IGNORECASE
+    )
+
+    if m:
+        return (
+            f"Trench: {m.group(1)} cm deep × "
+            f"{m.group(2)} cm wide, "
+            f"{m.group(3)} m from trunk"
+        )
+
+    return ""
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Extract Crop
+# ─────────────────────────────────────────────────────────────────────────────
+
+def extract_crop(bullet):
+
+    return {
+        "Crop Name": detect_crop(bullet),
+        "Land": _first(
+            bullet,
+            [
+                r'\b(medium\s+and\s+upland|'
+                r'low\s*land|'
+                r'upland|'
+                r'lowland|'
+                r'irrigated|'
+                r'rainfed|'
+                r'flood[- ]prone)\b'
+            ]
+        ),
+        "Stage": col_stage(bullet),
+        "Field Condition": col_field_condition(bullet),
+        "Field Preparation": col_field_prep(bullet),
+        "Seeds Requirement": col_seeds(bullet),
+        "Pests/Disease": col_pests(bullet),
+        "Fertilizer": col_fertilizer(bullet),
+        "Pesticides": col_pesticides(bullet),
+        "Precaution from": col_precaution_from(bullet),
+        "Precaution tool": col_precaution_tool(bullet),
+        "Cause of Damage": col_cause(bullet),
+        "Recommendation": col_recommendation(bullet),
+        "Varieties": col_varieties(bullet),
+        "Extra Information": col_extra(bullet),
+    }
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Merge Duplicate Crop Advisories
+# ─────────────────────────────────────────────────────────────────────────────
+
+def merge_crops(records):
+
+    merged = {}
+    order = []
+
+    for r in records:
+
+        name = r["Crop Name"]
+
+        if name not in merged:
+            merged[name] = dict(r)
+            order.append(name)
+
+        else:
+
+            for k, v in r.items():
+
+                if k == "Crop Name" or not v:
+                    continue
+
+                if v not in merged[name].get(k, ""):
+                    merged[name][k] = (
+                        merged[name][k] + "; " + v
+                    ).lstrip("; ")
+
+    useful_keys = [
+        "Pests/Disease",
+        "Pesticides",
+        "Fertilizer",
+        "Recommendation",
+        "Varieties",
+        "Seeds Requirement",
+    ]
+
+    return [
+        merged[n]
+        for n in order
+        if n != "General Advisory"
+        or any(merged[n].get(k) for k in useful_keys)
+    ]
