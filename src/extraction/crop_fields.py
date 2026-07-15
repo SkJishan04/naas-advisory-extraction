@@ -113,3 +113,111 @@ def col_seeds(t):
 
         ]
     )
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Pests / Disease
+# ─────────────────────────────────────────────────────────────────────────────
+
+def col_pests(t):
+
+    return _all_unique(
+        t,
+        r'\b(aphid|borer|stem\s+borer|rice\s+borer|leaf\s+folder|caseworm|'
+        r'rice\s+hispa|gall\s+midge|thrips|whitefly|white\s*fly|'
+        r'Epilachna\s+beetle|red\s+pumpkin\s+beetle|black\s+pumpkin\s+beetle|'
+        r'fruit\s*fly|mealy\s*bug|termite|hopper|nematode|'
+        r'late\s+blight|blight|blast|Ganoderma|fungal\s+wilt|'
+        r'rhizome\s+rot|anthracnose|anthacnose|fruit\s+rot|'
+        r'sigatoka|downy\s+mildew|mosaic|wilt|rot|rust)\b'
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Fertilizer
+# ─────────────────────────────────────────────────────────────────────────────
+
+def col_fertilizer(t):
+
+    return _first(
+        t,
+        [
+
+            r'((?:\d+\s+to\s+\d+|\d+)\s*quintals?\s+of\s+(?:compost|FYM)[^\.\n]{0,150})',
+
+            r'((?:apply|application\s+of)\s+\d+\s*quintals?\s+of\s+(?:FYM|compost)[^\.\n]{0,100})',
+
+            r'(\d+(?:\.\d+)?\s*kg\s+(?:Urea|SSP|MOP|DAP|NPK|Borax|FYM|compost)\b[^\.\n]{0,100})',
+
+            r'(?:apply|application\s+of)\s+([^\.\n]{0,80}'
+            r'(?:FYM|compost|urea|Urea|NPK|DAP|MOP|SSP|Borax|vermicompost)[^\.\n]{0,60})',
+
+            r'(\d+:\d+:\d+\s*kg/ha\s*(?:\([^)]*\))?[^\.\n]{0,80})',
+
+        ]
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Pesticides
+# ─────────────────────────────────────────────────────────────────────────────
+
+def col_pesticides(t):
+
+    return _first(
+        t,
+        [
+
+            r'(Emamectin\s+Benzoate\s+[\d.]+\s*%?\s*(?:SG|EC|WG)?[^\.\n]{0,80})',
+
+            r'(Lambda\s+Cyhalothrin\s+[\d.]+\s*EC[^\.\n]{0,80})',
+
+            r'(treat(?:ment|ing)?\s+(?:the\s+)?(?:dry\s+)?\w+\s+seeds?\s+with\s+'
+            r'[A-Za-z][A-Za-z\s]+?\s*@\s*[\d.]+\s*(?:g|ml)/kg[^\.\n]{0,60})',
+
+            r'(?:spray|apply|use)\s+('
+            r'(?:Dimethoate|Buprofezin|Imidacloprid|Acetamiprid|Mancozeb|'
+            r'Carbendazim|Chlorpyri(?:fos|phos)|Metalaxyl|Fipronil|'
+            r'Chlorantraniliprole|Emamectin|Spinosad|Thiamethoxam|'
+            r'Novaluron|Propiconazole|Hexaconazole|Bordeaux|'
+            r'Quinalphos|Flubendiamide|Trichoderma|Pseudomonas|'
+            r'Ferbam|Nabam|Cymoxanil|Cymozanil|Captan|Saaf|'
+            r'Carbendazim|Fenitrothion|Malathion|Acephate|'
+            r'Carboxyn|Streptocycline|Chlorpyriphos)'
+            r'[^\.\n]{0,120})',
+
+            r'(?:spray|apply)\s+([A-Za-z][^\.\n]{5,100}?'
+            r'(?:ml|g|kg|litre|EC|WP|SC|SG|WG))',
+
+        ]
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Precaution From
+# ─────────────────────────────────────────────────────────────────────────────
+
+def col_precaution_from(t):
+
+    return _all_unique(
+        t,
+        r'\b(flood|heavy\s+rain(?:fall)?|excess\s+rainfall|rain(?:fall)?|'
+        r'gusty\s+wind|strong\s+wind|thunderstorm|lightning|hail|'
+        r'water[\s-]*logging|water\s+stagnation|high\s+temperature|heat|'
+        r'disease|pest\s+infestation|wilting|lodging|cold|'
+        r'landslide|cyclone|extreme\s+event)\b'
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Precaution Tool
+# ─────────────────────────────────────────────────────────────────────────────
+
+def col_precaution_tool(t):
+
+    return _all_unique(
+        t,
+        r'\b(drainage\s+channels?|tarpaulin|polythene|'
+        r'mulch(?:ing)?|propping|staking|mechanical\s+support|'
+        r'raised\s+bed|bunding|shade|net|trap|irrigation|'
+        r'shed|insur(?:e|ance)|temporary\s+shed)\b'
+    )
