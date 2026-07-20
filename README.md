@@ -44,3 +44,12 @@ If you're reviewing this as a standalone project: everything in this repo — th
 - [Acknowledgements](#-acknowledgements)
 
 ---
+
+## 🌾 Project Overview
+
+### Background & Motivation
+
+Agricultural advisories give farmers timely, actionable guidance on sowing, transplanting, irrigation, drainage, fertilizer application, pest/disease control, harvesting, and protection from adverse weather. NAAS bulletins publish this information state-wise, several times a month, for use by farmers, researchers, and policymakers.
+
+The catch: these bulletins are distributed as **semi-structured PDFs** — free-flowing paragraphs and bullet points, not machine-readable tables — which makes them hard to analyze, search, or feed into any downstream decision-support system at scale.
+
