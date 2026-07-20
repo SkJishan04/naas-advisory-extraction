@@ -120,3 +120,20 @@ openpyxl>=3.1.0
 
 ---
 
+## ▶️ Usage
+
+1. Place your NAAS bulletin PDF(s) in the project root (or wherever `main.py`'s `PDF_PATHS` list points).
+2. Run:
+
+```bash
+python3 main.py
+```
+
+3. The script will:
+   - Extract raw text from each PDF page-by-page (PyMuPDF)
+   - Normalize the text (join broken words, fold bullet glyphs)
+   - Isolate the **Assam** advisory block (stopping at the next state heading — West Bengal, Bihar, Odisha, or Disclaimer)
+   - Extract weather + crop-wise fields
+   - Merge repeated mentions of the same crop
+   - Write everything to `Assam_Advisories.csv`
+
