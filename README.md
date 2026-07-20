@@ -209,3 +209,29 @@ This extractor implements **~180 regex-based rules**, organized as follows (coun
 *(This is the Assam-relevant subset of the project's full ~267-rule inventory documented in the thesis, Ch. 5.7 — the state-block/rainfall/week-forecast rows above are specific to Assam; the crop-detection and crop-field rows reflect the shared schema design used across all four states, as implemented in this Assam extractor.)*
 
 ---
+
+## 💡 Example
+
+**Input** (an advisory bullet from an Assam section):
+
+> *"Farmers are advised for sowing of Sali rice in medium and upland fields. Apply 40 kg Urea per bigha for the mustard crop at the flowering stage."*
+
+**Extracted structured output:**
+
+| Field | Value |
+|---|---|
+| Crop Name | Sali Rice/Paddy |
+| Land | medium and upland |
+| Stage | sowing |
+| Fertilizer | 40 kg Urea per bigha |
+
+**Weather example:**
+
+> *"18.2 mm (-20% deficit) rainfall was received over Assam during the past week."*
+
+| Field | Value |
+|---|---|
+| Rainfall(Assam) mm | 18.2 mm |
+| Excess(+)/Deficit(-) | -20% deficit |
+
+---
