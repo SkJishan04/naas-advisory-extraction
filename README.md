@@ -137,3 +137,17 @@ python3 main.py
    - Merge repeated mentions of the same crop
    - Write everything to `Assam_Advisories.csv`
 
+Sample console output:
+
+📄 NAAS_Bulletin-16-July-2024.pdf
+📅 16 July 2024 | Flood: YES | 🌾 ['Sali Rice', 'Banana, Citrus, Papaya', 'Coconut']
+
+============================================================
+✅ Done — 3 rows × 69 columns
+
+16 July 2024: Sali Rice, Banana, Citrus, Papaya, Coconut
+
+💾 Saved → Assam_Advisories.csv
+
+
+---
