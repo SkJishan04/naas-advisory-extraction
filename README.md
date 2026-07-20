@@ -62,3 +62,12 @@ Given a NAAS bulletin PDF containing an Assam advisory section, automatically ex
 
 The same information routinely appears in different sentence structures across bulletins — e.g. *"18.2 mm (-20% deficit) rainfall was received over Assam"* vs. *"Rainfall received over Assam was 18.2 mm (-20% deficit)"* — so a single regex pattern per field is not enough; each field needs primary + fallback patterns.
 
+### Objectives
+
+1. Isolate the Assam-specific advisory block from a multi-state bulletin PDF.
+2. Extract weather/rainfall/forecast fields for Assam specifically (single-series rainfall — unlike West Bengal, Assam does not need a Gangetic/Sub-Himalayan split).
+3. Detect crop names (including Assam-specific rice types: Sali, Boro, Ahu, Kharif) and extract 15 structured fields per crop.
+4. Output a clean, wide-format CSV/XLSX matching the project's shared schema.
+5. Maintain a **precision-oriented** extraction policy — a blank field is safer than a wrong one.
+
+---
