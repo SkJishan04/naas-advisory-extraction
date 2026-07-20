@@ -7,3 +7,18 @@
 **Rule-based extraction of structured agricultural advisory data from NAAS (National Academy of Agricultural Sciences) agromet bulletin PDFs — the Assam-state pipeline.**
 
 ---
+## 📌 Project Context & Scope
+
+This repository implements **my individual contribution** to a 4-person B.Tech thesis project:
+
+> **"Extraction of Agricultural Advisory Data from NAAS Bulletins using Regex, Machine Learning, and Hybrid Validation"**
+> Bachelor Thesis, Department of Computer Science and Engineering
+> **Indian Institute of Information Technology, Kalyani** — Spring Semester 2026
+> Authors: Subhadeep Mondal · Subham Das · **Sk Jishan** · Tanveer Ahmed
+> Supervisor: **Dr. Sanjay Chatterji**
+
+The full thesis covers four states — **West Bengal, Assam, Bihar, and Odisha** — split one-per-team-member, plus a shared machine-learning validation and hybrid regex–ML layer evaluated across all four states combined. **This repository contains only the Assam extraction pipeline**, which I designed, implemented, and tested. The other three states' extractors and the ML/hybrid validation layer were built by my teammates / developed collaboratively and are not included here.
+
+If you're reviewing this as a standalone project: everything in this repo — the regex design, the crop/field schema, and the results below — reflects the Assam component specifically.
+
+---
