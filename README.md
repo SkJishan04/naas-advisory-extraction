@@ -177,3 +177,35 @@ The output is a **wide-format table with a 2-row header**, matching the schema s
 → **69 columns total** (9 weather + 4 × 15 crop fields). If a bulletin has more than 4 crops, additional rows are created for the same advisory date, with the weather columns left blank on the overflow row(s).
 
 ---
+
+
+## 🔎 Regex Coverage
+
+This extractor implements **~180 regex-based rules**, organized as follows (counting each dictionary/alternation entry as one rule, consistent with the thesis's regex inventory methodology, Ch. 5):
+
+| Group | Approx. Count | Purpose |
+|---|---|---|
+| Text normalization | 5 | Clean line breaks, whitespace, bullet glyphs |
+| Assam block extraction | 6 | Isolate the Assam section from the full bulletin |
+| Assam rainfall extraction | 6 | Rainfall amount + excess/deficit departure |
+| Assam week forecast | 4 | Week 1 / Week 2 date ranges + qualifiers |
+| Crop dictionary | 51 | Crop name detection (incl. Assam-specific rice types) |
+| Action-based crop detection | 1 | Detects crop names near "sowing of", "harvest of", etc. |
+| Land | 6 | Upland / lowland / irrigated / rainfed / flood-prone |
+| Stage | 8 | Sowing, transplanting, flowering, harvesting, etc. |
+| Field Condition | 7 | Water-logging, moisture, standing water, etc. |
+| Field Preparation | 8 | Land prep, drainage, bunding, mulching |
+| Seeds Requirement | 8 | Seed rate per bigha, seed treatment |
+| Pests/Disease | 9 | Stem borer, blast, Ganoderma, aphid, etc. |
+| Fertilizer | 10 | Urea/SSP/MOP/DAP/FYM quantities |
+| Pesticides | 10 | Emamectin Benzoate, Lambda Cyhalothrin, generic dosages |
+| Precaution from / tool | 12 | Risk source + protective measure |
+| Cause of Damage | 6 | Flood, Brahmaputra, danger-level triggers |
+| Recommendation | 10 | Advisory action sentences |
+| Varieties | 8 | Named varieties (Ranjit, Luit, Mahsuri, TS-/PM- codes, etc.) |
+| Extra Information | 6 | Flood safety notes, livestock advisories, trench dimensions |
+| Bullet splitting | 1 | Splits the block into per-crop advisory units |
+
+*(This is the Assam-relevant subset of the project's full ~267-rule inventory documented in the thesis, Ch. 5.7 — the state-block/rainfall/week-forecast rows above are specific to Assam; the crop-detection and crop-field rows reflect the shared schema design used across all four states, as implemented in this Assam extractor.)*
+
+---
