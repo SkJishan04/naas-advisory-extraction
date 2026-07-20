@@ -71,3 +71,30 @@ The same information routinely appears in different sentence structures across b
 5. Maintain a **precision-oriented** extraction policy — a blank field is safer than a wrong one.
 
 ---
+
+## 🗂️ Folder Structure
+```
+naas-advisory-extraction/
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── .gitignore
+├── main.py # entry point — processes bulletin PDFs end to end
+├── src/
+│ ├── init.py
+│ └── extraction/
+│ ├── init.py
+│ ├── constants.py # state-boundary list (to know where Assam's section ends)
+│ ├── pdf_reader.py # PyMuPDF text extraction + advisory date parsing
+│ ├── text_normalizer.py # PDF text clean-up (line breaks, bullets, whitespace)
+│ ├── block_extractor.py # isolates the Assam block + splits it into bullets
+│ ├── weather_extractor.py # rainfall, forecast window, week qualifiers, flood alert
+│ ├── crop_detector.py # crop-name dictionary + detection
+│ ├── crop_fields.py # the 15 crop-wise field extractors + merge logic
+│ ├── output_writer.py # wide-format CSV/XLSX builder (2-row header)
+│ └── pipeline.py # orchestrates all of the above per PDF
+└── results/
+└── Assam_Advisories.csv # sample extracted output, verified against real bulletins
+
+```
+---
