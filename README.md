@@ -53,3 +53,12 @@ Agricultural advisories give farmers timely, actionable guidance on sowing, tran
 
 The catch: these bulletins are distributed as **semi-structured PDFs** — free-flowing paragraphs and bullet points, not machine-readable tables — which makes them hard to analyze, search, or feed into any downstream decision-support system at scale.
 
+### Problem Statement
+
+Given a NAAS bulletin PDF containing an Assam advisory section, automatically extract:
+
+- **Weather/advisory-level fields**: advisory date, rainfall forecast date, rainfall amount, excess/deficit category, Week 1 / Week 2 forecast qualifiers, flood alerts.
+- **Crop-wise fields** (up to 4 crops per bulletin): crop name, land type, growth stage, field condition, field preparation, seed requirement, pests/disease, fertilizer, pesticides, precaution source, precaution tool, cause of damage, recommendation, varieties, and extra information.
+
+The same information routinely appears in different sentence structures across bulletins — e.g. *"18.2 mm (-20% deficit) rainfall was received over Assam"* vs. *"Rainfall received over Assam was 18.2 mm (-20% deficit)"* — so a single regex pattern per field is not enough; each field needs primary + fallback patterns.
+
