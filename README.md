@@ -22,3 +22,25 @@ The full thesis covers four states — **West Bengal, Assam, Bihar, and Odisha**
 If you're reviewing this as a standalone project: everything in this repo — the regex design, the crop/field schema, and the results below — reflects the Assam component specifically.
 
 ---
+
+## 📑 Table of Contents
+
+- [Project Overview](#-project-overview)
+- [Folder Structure](#-folder-structure)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Output Format](#-output-format)
+- [Regex Coverage](#-regex-coverage)
+- [Example](#-example)
+- [Methodology](#-methodology)
+- [Evaluation Metrics & Results](#-evaluation-metrics--results)
+- [Sample Data](#-sample-data)
+- [Challenges Addressed](#-challenges-addressed)
+- [Tech Stack](#-tech-stack)
+- [Limitations](#-limitations)
+- [Future Work](#-future-work)
+- [Citation](#-citation)
+- [License](#-license)
+- [Acknowledgements](#-acknowledgements)
+
+---
