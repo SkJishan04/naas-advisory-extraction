@@ -98,3 +98,25 @@ naas-advisory-extraction/
 
 ```
 ---
+
+## ⚙️ Installation
+
+```bash
+git clone https://github.com/SkJishan04/naas-advisory-extraction.git
+cd naas-advisory-extraction
+
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+
+pip install -r requirements.txt
+```
+
+**Requirements** (`requirements.txt`):
+
+PyMuPDF>=1.24.0
+pandas>=2.0.0
+openpyxl>=3.1.0
+
+
+---
+
