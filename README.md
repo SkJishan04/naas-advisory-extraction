@@ -151,3 +151,29 @@ Sample console output:
 
 
 ---
+## 📊 Output Format
+
+The output is a **wide-format table with a 2-row header**, matching the schema shared across all four states in the project:
+
+**Row 1** — group labels (blank, blank, ..., `Crop 1`, blank..., `Crop 2`, ...)
+**Row 2** — actual column names
+
+**Weather/advisory columns (9):**
+
+| Column | Description |
+|---|---|
+| `Advisory Date` | Bulletin issue date |
+| `Rainfall Forecast Date` | Validity window of the forecast |
+| `Rainfall(Assam) mm` | Rainfall received over Assam |
+| `Excess(+)/Deficit(-)` | Departure from normal rainfall |
+| `Week 1` / `Week 2` | Forecast date ranges |
+| `W1_Assam` / `W2_Assam` | Forecast qualifier (above normal / below normal / normal / no rainfall) |
+| `Flood_Alert` | `YES` if flood/Brahmaputra/danger-level language is detected |
+
+**Crop-wise columns (15 × up to 4 crop slots = 60 columns):**
+
+`Crop Name`, `Land`, `Stage`, `Field Condition`, `Field Preparation`, `Seeds Requirement`, `Pests/Disease`, `Fertilizer`, `Pesticides`, `Precaution from`, `Precaution tool`, `Cause of Damage`, `Recommendation`, `Varieties`, `Extra Information`
+
+→ **69 columns total** (9 weather + 4 × 15 crop fields). If a bulletin has more than 4 crops, additional rows are created for the same advisory date, with the weather columns left blank on the overflow row(s).
+
+---
