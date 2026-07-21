@@ -339,3 +339,9 @@ Supervisor: Dr. Sanjay Chatterji.
 This repository implements the Assam-state component of that thesis.
 
 ---
+
+## 📄 License
+
+Released under the [MIT License](LICENSE).
+
+---
