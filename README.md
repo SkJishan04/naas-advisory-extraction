@@ -247,3 +247,29 @@ The extractor follows a **precision-oriented, rule-based approach**:
 5. **Precision-first philosophy**: when no pattern matches confidently, the field is left **blank** rather than guessed — an incorrect pesticide/fertilizer/rainfall value can mislead someone relying on it, while a blank value is easy to spot and manually fill in later.
 
 ---
+
+## 📈 Evaluation Metrics & Results
+
+Fields are evaluated against manually prepared ground truth using:
+
+- **Precision** = TP / (TP + FP) — of everything extracted, how much was correct
+- **Recall** = TP / (TP + FN) — of everything that should have been extracted, how much was found
+- **F1-score** = harmonic mean of precision and recall
+- **False Discovery Rate (FDR)** = 1 − Precision
+- **False Negative Rate (FNR)** = 1 − Recall
+
+**Assam-specific results (rule-based extraction), as reported in the thesis:**
+
+| Metric | Value |
+|---|---|
+| True Positives (TP) | 684 |
+| False Positives (FP) | 172 |
+| False Negatives (FN) | 431 |
+| **Precision** | **0.7991** |
+| **Recall** | **0.6135** |
+| **F1-score** | **0.6940** |
+
+Assam recorded the highest true-positive count and F1-score among the project's four state components, while maintaining precision above recall — consistent with the project-wide design goal.
+
+*For context (team-wide, all 4 states combined, including the ML/hybrid layers not part of this repo): the full project achieved 0.7912 precision / 0.6065 recall (rule-based), improving to 0.8439 precision / 0.5808 recall with hybrid regex–ML validation.*
+
