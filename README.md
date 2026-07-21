@@ -302,3 +302,13 @@ Assam recorded the highest true-positive count and F1-score among the project's 
 - **re** (standard library) — the extraction engine itself
 
 ---
+
+## ⚠️ Limitations
+
+- Regex rules can miss values when a bulletin uses unseen sentence structures.
+- Broad fallback patterns occasionally capture extra trailing text.
+- PDF text-extraction noise (line breaks, inconsistent bullet glyphs) can still affect matching in edge cases — this is mitigated but not eliminated by `text_normalizer.py`.
+- No automated comparison against ground truth is wired into this repo yet (see Future Work).
+- Crop-order in the output may not always match a manually prepared reference file, since bullets are processed in the order they appear in the PDF.
+
+---
