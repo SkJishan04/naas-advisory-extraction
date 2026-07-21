@@ -280,3 +280,15 @@ Assam recorded the highest true-positive count and F1-score among the project's 
 `results/Assam_Advisories.csv` contains extraction results manually verified against real NAAS bulletins (June, July, and November 2024), including real advisory content such as flood conditions along the Brahmaputra, Ganoderma disease in coconut, aphid infestation in rapeseed-mustard, and named Assam rice/mustard varieties (Sali Paddy, TS-36, PM-26, etc.). This file demonstrates the extractor's output on genuine advisory text, not synthetic data.
 
 ---
+
+## 🧩 Challenges Addressed
+
+- Multiple state sections within a single bulletin PDF
+- Inconsistent state headings and section boundaries
+- PDF text extraction noise: broken lines, irregular spacing, hyphenation
+- Crop synonyms (paddy vs. rice vs. Sali rice vs. Boro rice vs. Kharif rice)
+- Pest/disease names appearing in varied sentence forms
+- Fields missing entirely in some bulletins
+- Overly broad regex capturing unwanted trailing text
+
+---
