@@ -273,3 +273,10 @@ Assam recorded the highest true-positive count and F1-score among the project's 
 
 *For context (team-wide, all 4 states combined, including the ML/hybrid layers not part of this repo): the full project achieved 0.7912 precision / 0.6065 recall (rule-based), improving to 0.8439 precision / 0.5808 recall with hybrid regex–ML validation.*
 
+---
+
+## 🧾 Sample Data
+
+`results/Assam_Advisories.csv` contains extraction results manually verified against real NAAS bulletins (June, July, and November 2024), including real advisory content such as flood conditions along the Brahmaputra, Ganoderma disease in coconut, aphid infestation in rapeseed-mustard, and named Assam rice/mustard varieties (Sali Paddy, TS-36, PM-26, etc.). This file demonstrates the extractor's output on genuine advisory text, not synthetic data.
+
+---
