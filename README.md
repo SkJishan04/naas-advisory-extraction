@@ -323,3 +323,19 @@ Assam recorded the highest true-positive count and F1-score among the project's 
 - [ ] Explore ML-based candidate validation (as done project-wide with Logistic Regression / Linear SVM / Random Forest) scoped specifically to Assam's extracted candidates
 
 ---
+
+## 📖 Citation
+
+If referencing this work:
+
+Mondal, S., Das, S., Jishan, S., & Ahmed, T. (2026).
+Extraction of Agricultural Advisory Data from NAAS Bulletins using Regex,
+Machine Learning, and Hybrid Validation.
+Bachelor's Thesis, Department of Computer Science and Engineering,
+Indian Institute of Information Technology, Kalyani.
+Supervisor: Dr. Sanjay Chatterji.
+
+
+This repository implements the Assam-state component of that thesis.
+
+---
