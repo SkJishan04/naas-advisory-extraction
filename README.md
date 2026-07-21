@@ -292,3 +292,13 @@ Assam recorded the highest true-positive count and F1-score among the project's 
 - Overly broad regex capturing unwanted trailing text
 
 ---
+
+## 🛠️ Tech Stack
+
+- **Python 3.9+**
+- **PyMuPDF (fitz)** — PDF text extraction
+- **pandas** — tabular data handling
+- **openpyxl** — Excel (.xlsx) export
+- **re** (standard library) — the extraction engine itself
+
+---
