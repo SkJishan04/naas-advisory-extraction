@@ -235,3 +235,15 @@ This extractor implements **~180 regex-based rules**, organized as follows (coun
 | Excess(+)/Deficit(-) | -20% deficit |
 
 ---
+
+## 🧠 Methodology
+
+The extractor follows a **precision-oriented, rule-based approach**:
+
+1. **PDF → text**: PyMuPDF extracts raw text page-by-page.
+2. **Normalization**: hyphen-broken words are rejoined, whitespace is collapsed, and bullet glyphs (`·`, `▪`, `●`, etc.) are folded to a single canonical `•` so bullet-splitting is reliable regardless of the source PDF's formatting.
+3. **State-block isolation**: a boundary regex (built from every other Indian state name that could appear as a heading) marks where the Assam section ends.
+4. **Field extraction**: each field has a primary pattern plus fallback patterns to catch differently-worded sentences expressing the same information.
+5. **Precision-first philosophy**: when no pattern matches confidently, the field is left **blank** rather than guessed — an incorrect pesticide/fertilizer/rainfall value can mislead someone relying on it, while a blank value is easy to spot and manually fill in later.
+
+---
