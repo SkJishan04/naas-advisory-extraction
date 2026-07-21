@@ -345,3 +345,10 @@ This repository implements the Assam-state component of that thesis.
 Released under the [MIT License](LICENSE).
 
 ---
+
+##  Acknowledgements
+
+- **Dr. Sanjay Chatterji**, Assistant Professor, Dept. of CSE, IIIT Kalyani — project supervisor
+- **Mou Sarkar** — for support and guidance during the project
+- My teammates — **Subhadeep Mondal, Subham Das, Tanveer Ahmed** — for West Bengal, Bihar, and Odisha, and the shared ML/hybrid validation work
+- **NAAS / IMD** — for publishing the agromet advisory bulletins this project extracts from
