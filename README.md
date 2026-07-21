@@ -312,3 +312,14 @@ Assam recorded the highest true-positive count and F1-score among the project's 
 - Crop-order in the output may not always match a manually prepared reference file, since bullets are processed in the order they appear in the PDF.
 
 ---
+
+## 🚀 Future Work
+
+- [ ] Add an `evaluation/` module that compares extractor output against `assam_ground_truth.xlsx` and reports Precision/Recall/F1/FDR/FNR automatically
+- [ ] Add a `tests/` suite (pytest) covering each extraction function against known worked examples
+- [ ] Replace hardcoded `PDF_PATHS` in `main.py` with CLI arguments (`argparse`) and a `data/pdfs/` folder convention
+- [ ] Expand fallback regex coverage for `Recommendation` and `Extra Information` (currently the lowest-precision fields project-wide)
+- [ ] OCR fallback for scanned/image-based bulletin PDFs
+- [ ] Explore ML-based candidate validation (as done project-wide with Logistic Regression / Linear SVM / Random Forest) scoped specifically to Assam's extracted candidates
+
+---
