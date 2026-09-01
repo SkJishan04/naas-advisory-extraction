@@ -1,4 +1,5 @@
 import os
+from .text_normalizer import normalize_text
 
 from .pdf_reader import (
     pdf_to_text,
@@ -41,6 +42,7 @@ def run_pipeline(pdf_paths, output_path):
         print(f"\n📄 {path}")
 
         txt = pdf_to_text(path)
+        txt = normalize_text(txt)
 
         date = get_date(txt)
 
