@@ -132,3 +132,61 @@ def save_csv(df, output_path):
     ) as f:
 
         f.write(csv_text)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Save XLSX
+# ─────────────────────────────────────────────────────────────────────────────
+
+def save_xlsx(df, output_path):
+
+    with pd.ExcelWriter(
+        output_path,
+        engine="openpyxl"
+    ) as writer:
+
+        df.to_excel(
+            writer,
+            index=False,
+            sheet_name="Assam Advisories"
+        )
+
+
+def dataframe_to_xlsx(df, output_path):
+
+    group_header = []
+
+    for c in ALL_COLS:
+
+        m = re.match(r"C(\d+)_Crop Name", c)
+
+        if m:
+            group_header.append(f"Crop {m.group(1)}")
+        else:
+            group_header.append("")
+
+    second_header = [
+        re.sub(r"^C\d+_", "", c)
+        for c in ALL_COLS
+    ]
+
+    with pd.ExcelWriter(
+        output_path,
+        engine="openpyxl"
+    ) as writer:
+
+        pd.DataFrame(
+            [group_header, second_header]
+        ).to_excel(
+            writer,
+            index=False,
+            header=False,
+            sheet_name="Assam Advisories"
+        )
+
+        df.to_excel(
+            writer,
+            index=False,
+            header=False,
+            startrow=2,
+            sheet_name="Assam Advisories"
+        )
