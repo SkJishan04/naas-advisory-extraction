@@ -76,7 +76,7 @@ def get_weather(assam):
     m = re.search(
         r'(?:next\s+two\s+weeks[^)]*\)\s*is\s*|forecast.*?is\s+)(.*?)(?:\.\s*$|\.\s*•)',
         hdr,
-        re.DOTALL
+        re.DOTALL | re.IGNORECASE
     )
 
     if m:
@@ -87,40 +87,56 @@ def get_weather(assam):
             m.group(1)
         ).strip()
 
-        mw1 = re.search(
-            r'(above\s+normal|below\s+normal|normal|no\s+rain(?:fall)?|large\s+(?:excess|deficit))'
-            r'(?:\s+rainfall)?\s+for\s+week\s*1',
+        # --------------------------------------------------------------
+        # Same condition for both weeks
+        # Example:
+        # "below normal rainfall for week 1 and week 2"
+        # --------------------------------------------------------------
+
+        same = re.search(
+            r'(above\s+normal|below\s+normal|normal|'
+            r'no\s+rain(?:fall)?|large\s+(?:excess|deficit))'
+            r'(?:\s+rainfall)?\s+for\s+week\s*1\s+and\s+week\s*2',
             forecast_txt,
             re.IGNORECASE
         )
 
-        if mw1:
-            w["W1_Assam"] = mw1.group(1).strip()
+        if same:
+            condition = same.group(1).strip()
+            w["W1_Assam"] = condition
+            w["W2_Assam"] = condition
 
-        mw2 = re.search(
-            r'(?:and\s+)'
-            r'(above\s+normal|below\s+normal|normal|no\s+rain(?:fall)?|large\s+(?:excess|deficit))'
-            r'(?:\s+rainfall)?\s+for\s+week\s*2',
-            forecast_txt,
-            re.IGNORECASE
-        )
+        else:
 
-        if mw2:
-            w["W2_Assam"] = mw2.group(1).strip()
+            # ----------------------------------------------------------
+            # Separate Week 1 condition
+            # ----------------------------------------------------------
 
-        if "W1_Assam" not in w:
-
-            mw12 = re.search(
-                r'(above\s+normal|below\s+normal|normal|no\s+rain(?:fall)?|large\s+(?:excess|deficit))'
-                r'(?:\s+rainfall)?\s+for\s+week\s*1\s+and\s+week\s*2',
+            mw1 = re.search(
+                r'(above\s+normal|below\s+normal|normal|'
+                r'no\s+rain(?:fall)?|large\s+(?:excess|deficit))'
+                r'(?:\s+rainfall)?\s+for\s+week\s*1',
                 forecast_txt,
                 re.IGNORECASE
             )
 
-            if mw12:
-                w["W1_Assam"] = mw12.group(1).strip()
-                w["W2_Assam"] = mw12.group(1).strip()
+            if mw1:
+                w["W1_Assam"] = mw1.group(1).strip()
 
+            # ----------------------------------------------------------
+            # Separate Week 2 condition
+            # ----------------------------------------------------------
+
+            mw2 = re.search(
+                r'(above\s+normal|below\s+normal|normal|'
+                r'no\s+rain(?:fall)?|large\s+(?:excess|deficit))'
+                r'(?:\s+rainfall)?\s+for\s+week\s*2',
+                forecast_txt,
+                re.IGNORECASE
+            )
+
+            if mw2:
+                w["W2_Assam"] = mw2.group(1).strip()
     # ------------------------------------------------------------------
     # Flood Alert
     # ------------------------------------------------------------------
